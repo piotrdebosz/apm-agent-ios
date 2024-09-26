@@ -23,6 +23,7 @@ public class InstrumentationConfigBuilder {
   var enableSystemMetrics: Bool?
   var enableLifecycleEvents: Bool?
   var persistentStorageConfig: PersistencePerformancePreset?
+  var delegateURLSessionClassesToInstrument: [AnyClass]?
 
   public init() {}
 
@@ -53,6 +54,11 @@ public class InstrumentationConfigBuilder {
   public func withLifecycleEvents(_ enable: Bool) -> Self {
     self.enableLifecycleEvents = enable
     return self
+  }
+
+  public func withDelegateURLSessionClassesToInstrument(_ classes: [AnyClass]) -> Self {
+      self.delegateURLSessionClassesToInstrument = classes
+      return self
   }
 
   public func withPersistentStorageConfiguration(_ config: PersistencePerformancePreset) -> Self {
@@ -91,6 +97,10 @@ public class InstrumentationConfigBuilder {
       config.storageConfiguration = persistentStorageConfig
     }
 
+    if let delegateURLSessionClassesToInstrument = self.delegateURLSessionClassesToInstrument {
+      config.delegateURLSessionClassesToInstrument = delegateURLSessionClassesToInstrument
+    }
+      
     return config
   }
 }

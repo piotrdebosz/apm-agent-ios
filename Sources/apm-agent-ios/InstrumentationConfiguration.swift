@@ -23,5 +23,6 @@ public struct InstrumentationConfiguration {
   public var enableSystemMetrics = true
   public var enableLifecycleEvents = true
   public var storageConfiguration: PersistencePerformancePreset = .default
+  public var delegateURLSessionClassesToInstrument: [AnyClass] = []
   public init() {}
 }

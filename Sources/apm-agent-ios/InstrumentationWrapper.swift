@@ -30,7 +30,7 @@ class InstrumentationWrapper {
     #if os(iOS) && !targetEnvironment(macCatalyst)
       var netstatInjector: NetworkStatusInjector?
     #endif
-  
+
     var urlSessionInstrumentation: URLSessionInstrumentation?
     let config: AgentConfigManager
 
@@ -124,7 +124,8 @@ class InstrumentationWrapper {
                                        SemanticAttributes.exceptionEscaped.rawValue: AttributeValue.bool(false),
                                        SemanticAttributes.exceptionMessage.rawValue: AttributeValue.string(error.localizedDescription)])
           // swiftlint:enable line_length
-        })
+        },
+                                                          delegateClassesToInstrument: config.instrumentation.delegateURLSessionClassesToInstrument)
 
         urlSessionInstrumentation = URLSessionInstrumentation(configuration: config)
     }
